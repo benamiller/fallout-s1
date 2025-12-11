@@ -95,22 +95,22 @@ export const SlideViewer: React.FC<SlideViewerProps> = ({
             </div>
         </div>
 
-        {/* Right: Visual - Duotone Filter Effect */}
+        {/* Right: Visual - Color Phosphor Filter Effect */}
         <div className="flex-1 relative hidden md:block group h-full flex-shrink-0 border-2 border-current rounded-sm overflow-hidden bg-black">
             
             <div className="relative w-full h-full">
-                {/* 1. Base Image - High contrast grayscale */}
+                {/* 1. Base Image - Reduced grayscale to allow original colors (40% color, 60% gray) */}
                 <img 
                     src={slide.imagePlaceholder} 
                     alt={slide.title}
-                    className="w-full h-full object-cover grayscale contrast-125 brightness-75"
+                    className="w-full h-full object-cover grayscale-[0.6] contrast-110 brightness-90"
                 />
                 
-                {/* 2. Multiply Layer - Adds the dark tones (Dark Green/Amber) */}
-                <div className={`absolute inset-0 mix-blend-multiply ${multiplyColor} opacity-90`}></div>
+                {/* 2. Multiply Layer - Reduced opacity to 50% so it tints but doesn't crush blacks/colors completely */}
+                <div className={`absolute inset-0 mix-blend-multiply ${multiplyColor} opacity-50`}></div>
                 
-                {/* 3. Screen Layer - Adds the light tones (Bright Green/Amber) */}
-                <div className={`absolute inset-0 mix-blend-screen ${screenColor} opacity-40`}></div>
+                {/* 3. Screen Layer - Reduced opacity to 25% to tint highlights without washing out color */}
+                <div className={`absolute inset-0 mix-blend-screen ${screenColor} opacity-25`}></div>
                 
                 {/* 4. Scanlines Overlay specific to image */}
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-10 background-size-[100%_2px,3px_100%] pointer-events-none opacity-50"></div>
